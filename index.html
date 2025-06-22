@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anidroid - Anime Online Gratis HD</title>
-    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="icon" href="logoBackground.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
         :root {
+            /* Dark Theme (Default) */
             --brand-color: #f47521;
             --brand-hover: #fb8c00;
-            --dark-bg: #000000;
-            --text-light: #ffffff;
+            --bg-color: #000000;
+            --text-primary: #ffffff;
             --text-secondary: #cccccc;
+            --container-bg: rgba(10, 10, 10, 0.6);
+            --logo-bg: transparent;
+            --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.9) 15%, rgba(0, 0, 0, 0.25) 70%);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-color: #f0f2f5;
+                --text-primary: #1c1e21;
+                --text-secondary: #555555;
+                --container-bg: rgba(255, 255, 255, 0.65);
+                --logo-bg: rgba(0, 0, 0, 0.05); /* Fondo gris semitransparente para el logo en tema claro */
+                --overlay-gradient: linear-gradient(to top, rgba(240, 242, 245, 0.8) 15%, rgba(240, 242, 245, 0.2) 70%);
+            }
         }
 
         @keyframes kenburns {
@@ -31,51 +46,51 @@
             height: 100%;
             margin: 0;
             font-family: 'Lato', sans-serif;
-            color: var(--text-light);
-            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            background-color: var(--bg-color);
             overflow: hidden;
         }
 
         .page-wrapper {
-            padding: 10px; /* Margen para que la imagen no toque los bordes */
+            padding: 10px;
             height: calc(100% - 20px);
             width: calc(100% - 20px);
             position: relative;
         }
 
-        .background-container {
+        .background-stack {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .background-layer {
+            position: absolute;
+            width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            border-radius: 15px; /* Bordes redondeados para la imagen */
-            transition: opacity 1.5s ease-in-out;
             opacity: 0;
+            transition: opacity 1s ease-in-out;
             animation: kenburns 30s ease-in-out infinite alternate;
         }
 
-        .background-container.visible {
+        .background-layer.visible {
             opacity: 1;
+            z-index: 2; /* Pone la imagen visible encima de la anterior */
         }
 
-        .background-container::after {
+        .background-layer::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 0.2) 60%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay-gradient);
         }
 
         .content-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -87,6 +102,11 @@
         .container {
             max-width: 550px;
             text-align: center;
+            background: var(--container-bg);
+            padding: 30px 40px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -96,13 +116,14 @@
             border-radius: 22px;
             border: 3px solid var(--brand-color);
             box-shadow: 0 0 20px rgba(244, 117, 33, 0.5);
+            background-color: var(--logo-bg);
         }
 
         h1 {
             font-size: 3.5em;
             font-weight: 900;
             margin: 0 0 10px;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
         p.slogan {
@@ -117,7 +138,7 @@
         .download-button {
             display: inline-block;
             background-color: var(--brand-color);
-            color: var(--text-light);
+            color: var(--text-primary);
             padding: 15px 40px;
             text-decoration: none;
             font-size: 1.3em;
@@ -142,7 +163,7 @@
             text-align: center;
             font-size: 0.9em;
             color: var(--text-secondary);
-            z-index: 2;
+            z-index: 3;
         }
 
         footer a {
@@ -167,7 +188,10 @@
 <body>
 
     <div class="page-wrapper">
-        <div id="background" class="background-container"></div>
+        <div class="background-stack">
+            <div id="bg1" class="background-layer"></div>
+            <div id="bg2" class="background-layer"></div>
+        </div>
 
         <div class="content-wrapper">
             <div class="container">
@@ -185,38 +209,76 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const backgroundElement = document.getElementById('background');
+            const bgLayers = [document.getElementById('bg1'), document.getElementById('bg2')];
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            const fetchNewImage = () => {
-                fetch('https://api.waifu.pics/sfw/waifu')
-                    .then(response => {
-                        if (!response.ok) throw new Error('Network response was not ok');
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.url) {
-                            const img = new Image();
-                            img.src = data.url;
-                            img.onload = () => {
-                                backgroundElement.style.backgroundImage = `url(${data.url})`;
-                                backgroundElement.classList.add('visible');
-                            };
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar la imagen de fondo:', error);
-                        backgroundElement.classList.remove('visible');
+            let currentLayer = 0;
+            const imageQueue = [];
+            let isFetching = false;
+
+            const API_URL = 'https://api.waifu.pics/sfw/waifu';
+
+            const fillImageQueue = async () => {
+                if (isFetching || imageQueue.length >= 3) return;
+                isFetching = true;
+
+                try {
+                    const promises = [];
+                    for (let i = 0; i < 3 - imageQueue.length; i++) {
+                        promises.push(fetch(API_URL).then(res => res.json()));
+                    }
+                    const results = await Promise.all(promises);
+                    results.forEach(data => {
+                        if (data.url) imageQueue.push(data.url);
                     });
+                } catch (error) {
+                    console.error('Error fetching images:', error);
+                } finally {
+                    isFetching = false;
+                    // Si es la primera vez, iniciar el ciclo
+                    if (bgLayers[0].style.backgroundImage === '') {
+                        cycleImage();
+                    }
+                }
             };
 
-            // Carga la primera imagen y luego actualiza cada 6 segundos
-            fetchNewImage();
-            setInterval(() => {
-                backgroundElement.classList.remove('visible');
-                // Damos tiempo a que la opacidad baje antes de cargar la nueva imagen
-                setTimeout(fetchNewImage, 1500);
-            }, 6000);
+            const cycleImage = () => {
+                if (imageQueue.length === 0) {
+                    fillImageQueue();
+                    return;
+                }
+
+                const nextImageUrl = imageQueue.shift();
+                const img = new Image();
+                img.src = nextImageUrl;
+
+                img.onload = () => {
+                    const nextLayerIndex = (currentLayer + 1) % 2;
+                    const currentLayerElement = bgLayers[currentLayer];
+                    const nextLayerElement = bgLayers[nextLayerIndex];
+
+                    nextLayerElement.style.backgroundImage = `url(${nextImageUrl})`;
+                    nextLayerElement.classList.add('visible');
+                    currentLayerElement.classList.remove('visible');
+
+                    currentLayer = nextLayerIndex;
+
+                    // Rellenar la cola si es necesario
+                    if (imageQueue.length < 2) {
+                        fillImageQueue();
+                    }
+                };
+                
+                img.onerror = () => {
+                    console.error('Error loading image:', nextImageUrl);
+                    // Intentar con la siguiente imagen de la cola
+                    cycleImage();
+                }
+            };
+
+            // Iniciar todo
+            fillImageQueue();
+            setInterval(cycleImage, 6000);
         });
     </script>
 
