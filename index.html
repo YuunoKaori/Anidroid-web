@@ -3,30 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anidroid - Tu Universo de Anime</title>
+    <title>Anidroid - Anime Online Gratis HD</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+        :root {
+            --brand-color: #f47521;
+            --brand-hover: #fb8c00;
+            --dark-bg: #000000;
+            --text-light: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        @keyframes kenburns {
+            0% { transform: scale(1.1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-2%, 1%); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); }
+        }
 
         body, html {
             height: 100%;
             margin: 0;
             font-family: 'Lato', sans-serif;
-            color: #ffffff;
-            overflow: hidden; /* Evita barras de scroll */
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+            overflow: hidden;
+        }
+
+        .page-wrapper {
+            padding: 10px; /* Margen para que la imagen no toque los bordes */
+            height: calc(100% - 20px);
+            width: calc(100% - 20px);
+            position: relative;
         }
 
         .background-container {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 1;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 1s ease-in-out, opacity 1s ease-in-out;
+            border-radius: 15px; /* Bordes redondeados para la imagen */
+            transition: opacity 1.5s ease-in-out;
             opacity: 0;
+            animation: kenburns 30s ease-in-out infinite alternate;
+        }
+
+        .background-container.visible {
+            opacity: 1;
         }
 
         .background-container::after {
@@ -36,10 +69,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+            border-radius: 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 0.2) 60%);
         }
 
         .content-wrapper {
+            position: relative;
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,108 +85,138 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 550px;
             text-align: center;
-            background: rgba(10, 10, 10, 0.5);
-            padding: 30px 40px;
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
             width: 100px;
             height: 100px;
             margin-bottom: 15px;
-            border-radius: 20px;
-            border: 2px solid #f47521;
+            border-radius: 22px;
+            border: 3px solid var(--brand-color);
+            box-shadow: 0 0 20px rgba(244, 117, 33, 0.5);
         }
 
         h1 {
-            font-size: 3em;
-            font-weight: 700;
+            font-size: 3.5em;
+            font-weight: 900;
             margin: 0 0 10px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
         }
 
-        p {
-            font-size: 1.1em;
+        p.slogan {
+            font-size: 1.3em;
+            font-weight: 700;
             line-height: 1.5;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .download-button {
             display: inline-block;
-            background-color: #f47521; /* Naranja Crunchyroll */
-            color: #ffffff;
-            padding: 15px 35px;
+            background-color: var(--brand-color);
+            color: var(--text-light);
+            padding: 15px 40px;
             text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.3em;
+            font-weight: 700;
             border-radius: 8px;
             transition: transform 0.2s ease, background-color 0.3s ease;
             text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: pulse 2.5s infinite;
         }
 
         .download-button:hover {
-            background-color: #fb8c00;
+            background-color: var(--brand-hover);
             transform: scale(1.05);
         }
 
-        .footer-note {
-            margin-top: 25px;
+        footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
             font-size: 0.9em;
-            color: #cccccc;
+            color: var(--text-secondary);
+            z-index: 2;
         }
 
-        .footer-note a {
-            color: #f47521;
+        footer a {
+            color: var(--brand-color);
             font-weight: bold;
             text-decoration: none;
         }
 
-        .footer-note a:hover {
+        footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            p.slogan { font-size: 1.1em; }
+            .download-button { font-size: 1.1em; padding: 12px 30px; }
+            .container { padding: 20px; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="background" class="background-container"></div>
+    <div class="page-wrapper">
+        <div id="background" class="background-container"></div>
 
-    <div class="content-wrapper">
-        <div class="container">
-            <img src="logo.png" alt="Anidroid Logo" class="logo">
-            <h1>Anidroid</h1>
-            <p>Tu universo de anime en una sola app. Descubre, explora y disfruta de los mejores títulos, desde clásicos hasta los últimos estrenos.</p>
-            <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
-            <p class="footer-note">¿Buscas otra versión? Visita la <a href="https://github.com/YuunoKaori/Anidroid/releases" target="_blank">página de releases</a>.</p>
+        <div class="content-wrapper">
+            <div class="container">
+                <img src="logo.png" alt="Anidroid Logo" class="logo">
+                <h1>Anidroid</h1>
+                <p class="slogan">Anime Online Gratis HD</p>
+                <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
+            </div>
         </div>
     </div>
+
+    <footer>
+        &copy; <span id="year"></span> Anidroid. ¿Buscas otra versión? Visita la <a href="https://github.com/YuunoKaori/Anidroid/releases" target="_blank">página de releases</a>.
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const backgroundElement = document.getElementById('background');
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-            fetch('https://api.waifu.pics/sfw/waifu')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.url) {
-                        // Precargar la imagen para una transición más suave
-                        const img = new Image();
-                        img.src = data.url;
-                        img.onload = () => {
-                            backgroundElement.style.backgroundImage = `url(${data.url})`;
-                            backgroundElement.style.opacity = 1;
-                        };
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al cargar la imagen de fondo:', error);
-                    // Poner un fondo de emergencia si la API falla
-                    backgroundElement.style.backgroundColor = '#1a1a1a';
-                    backgroundElement.style.opacity = 1;
-                });
+            const fetchNewImage = () => {
+                fetch('https://api.waifu.pics/sfw/waifu')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.url) {
+                            const img = new Image();
+                            img.src = data.url;
+                            img.onload = () => {
+                                backgroundElement.style.backgroundImage = `url(${data.url})`;
+                                backgroundElement.classList.add('visible');
+                            };
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar la imagen de fondo:', error);
+                        backgroundElement.classList.remove('visible');
+                    });
+            };
+
+            // Carga la primera imagen y luego actualiza cada 6 segundos
+            fetchNewImage();
+            setInterval(() => {
+                backgroundElement.classList.remove('visible');
+                // Damos tiempo a que la opacidad baje antes de cargar la nueva imagen
+                setTimeout(fetchNewImage, 1500);
+            }, 6000);
         });
     </script>
 
