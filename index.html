@@ -453,10 +453,11 @@
 
             if (music && musicControl) {
                 const volumeLevels = [0.1, 0.5, 1.0, 0]; // 0 represents mute
-                let volumeIndex = 0; // Attempt to start at 10% volume
+                let volumeIndex = 3; // Start muted
 
                 const setVolume = (levelIndex, useFadeIn = false) => {
-                    const targetVolume = volumeLevels[levelIndex];
+                    volumeIndex = levelIndex;
+                    const targetVolume = volumeLevels[volumeIndex];
 
                     if (targetVolume === 0) {
                         music.muted = true;
@@ -469,14 +470,7 @@
                         iconPlaying.style.display = 'block';
                         iconMuted.style.display = 'none';
                         
-                        if (music.paused) {
-                            music.play().catch(e => {
-                                console.error("Playback was prevented. Reverting to muted state.", e);
-                                // If autoplay fails, revert UI to muted state
-                                music.muted = true;
-                                setVolume(3); // Set to muted state
-                            });
-                        }
+                        if (music.paused) music.play().catch(e => console.error("Playback failed", e));
 
                         if (useFadeIn) {
                             music.volume = 0;
@@ -496,13 +490,24 @@
                     }
                 };
 
-                // Set initial state with fade-in
-                setVolume(volumeIndex, true);
+                const startMusicOnFirstInteraction = () => {
+                    if (music.muted) {
+                        setVolume(0, true); // Activate with fade-in to 10%
+                    }
+                    window.removeEventListener('scroll', startMusicOnFirstInteraction);
+                };
+
+                // Set initial state to muted
+                setVolume(volumeIndex);
+
+                // Listen for scroll to start music
+                window.addEventListener('scroll', startMusicOnFirstInteraction, { once: true });
 
                 musicControl.addEventListener('click', () => {
+                    window.removeEventListener('scroll', startMusicOnFirstInteraction); // Interaction happened
                     const wasMuted = (volumeLevels[volumeIndex] === 0);
-                    volumeIndex = (volumeIndex + 1) % volumeLevels.length;
-                    setVolume(volumeIndex, wasMuted);
+                    const nextIndex = (volumeIndex + 1) % volumeLevels.length;
+                    setVolume(nextIndex, wasMuted);
                 });
             }
         });
