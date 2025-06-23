@@ -9,69 +9,227 @@
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
         :root {
-            --brand-color: #f47521; --brand-hover: #fb8c00; --bg-color: #0d0d0d; --text-primary: #ffffff;
-            --text-secondary: #cccccc; --container-bg: rgba(10, 10, 10, 0.6); --section-bg: #1a1a1a;
-            --logo-bg: transparent; --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.9) 15%, rgba(0, 0, 0, 0.25) 70%);
+            /* Dark Theme (Default) */
+            --brand-color: #f47521;
+            --brand-hover: #fb8c00;
+            --bg-color: #0d0d0d;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --container-bg: rgba(10, 10, 10, 0.6);
+            --section-bg: #1a1a1a;
+            --logo-bg: transparent;
+            --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.9) 15%, rgba(0, 0, 0, 0.25) 70%);
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f0f2f5; --text-primary: #1c1e21; --text-secondary: #555555;
-                --container-bg: rgba(255, 255, 255, 0.65); --section-bg: #ffffff;
-                --logo-bg: rgba(0, 0, 0, 0.15); --overlay-gradient: linear-gradient(to top, rgba(240, 242, 245, 0.8) 15%, rgba(240, 242, 245, 0.2) 70%);
+                --bg-color: #f0f2f5;
+                --text-primary: #1c1e21;
+                --text-secondary: #555555;
+                --container-bg: rgba(255, 255, 255, 0.65);
+                --section-bg: #ffffff;
+                --logo-bg: rgba(0, 0, 0, 0.15); /* Fondo más oscuro para el logo en tema claro */
+                --overlay-gradient: linear-gradient(to top, rgba(240, 242, 245, 0.8) 15%, rgba(240, 242, 245, 0.2) 70%);
             }
         }
 
-        @keyframes kenburns-subtle { 0% { transform: scale(1.05) translate(0, 0); } 100% { transform: scale(1.08) translate(-1%, 1%); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); } 100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes kenburns-subtle {
+            0% { transform: scale(1.05) translate(0, 0); }
+            100% { transform: scale(1.08) translate(-1%, 1%); }
+        }
 
-        body, html { margin: 0; font-family: 'Lato', sans-serif; color: var(--text-primary); background-color: var(--bg-color); overflow: hidden; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); }
+        }
 
-        .hero-section { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; }
-        .background-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; border-radius: 15px; overflow: hidden; }
-        .background-layer { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; animation: kenburns-subtle 45s ease-in-out infinite alternate; }
+        body, html {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .background-stack {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .background-layer {
+            position: absolute;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: kenburns-subtle 45s ease-in-out infinite alternate;
+        }
+
         .background-layer.visible { opacity: 1; z-index: 2; }
-        .background-layer::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-gradient); }
+        .background-layer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay-gradient);
+        }
 
-        .hero-content { position: relative; z-index: 3; max-width: 95%; width: 550px; text-align: center; background: var(--container-bg); padding: 20px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; justify-content: center; min-height: 500px; }
-        .logo { width: 90px; height: 90px; margin: 0 auto 15px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
-        h1 { font-size: 3em; font-weight: 900; margin: 0 0 5px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
-        p.slogan { font-size: 1.1em; font-weight: 700; line-height: 1.5; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        .download-button { display: inline-block; background-color: var(--brand-color); color: var(--text-primary); padding: 12px 30px; text-decoration: none; font-size: 1.1em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; margin-bottom: 20px; }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 550px;
+            text-align: center;
+            background: var(--container-bg);
+            padding: 30px 40px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo { width: 100px; height: 100px; margin-bottom: 15px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
+        h1 { font-size: 3.5em; font-weight: 900; margin: 0 0 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
+        p.slogan { font-size: 1.3em; font-weight: 700; line-height: 1.5; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .download-button { display: inline-block; background-color: var(--brand-color); color: var(--text-primary); padding: 15px 40px; text-decoration: none; font-size: 1.3em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; }
         .download-button:hover { background-color: var(--brand-hover); transform: scale(1.05); }
 
-        #info-display { min-height: 90px; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: rgba(0,0,0,0.2); transition: all 0.3s ease; animation: fadeIn 0.5s ease; }
-        #info-display h3 { margin: 0 0 5px; font-size: 1.2em; color: var(--brand-color); }
-        #info-display p { margin: 0; line-height: 1.5; color: var(--text-secondary); }
-        #info-display .tag { background-color: var(--brand-color); color: white; font-size: 0.7em; padding: 2px 6px; border-radius: 5px; display: inline-block; margin-left: 5px; vertical-align: middle; }
+        main { background-color: var(--section-bg); padding-bottom: 80px; }
+        .content-section { max-width: 1200px; margin: 0 auto; padding: 60px 20px; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .content-section.visible { opacity: 1; transform: translateY(0); }
+        .content-section h2 { font-size: 2.5em; text-align: center; margin-bottom: 40px; font-weight: 900; }
 
-        .icon-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-        .icon-button { cursor: pointer; font-size: 1.8em; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); transition: all 0.2s ease; }
-        .icon-button:hover, .icon-button.active { background: var(--brand-color); color: white; transform: scale(1.1); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { text-align: center; padding: 20px; }
+        .feature-card .icon { display: inline-block; width: 64px; height: 64px; margin-bottom: 15px; }
+        .feature-card .icon svg { fill: var(--brand-color); width: 100%; height: 100%; }
+        .feature-card h3 { font-size: 1.5em; margin-bottom: 10px; }
+        .feature-card p { color: var(--text-secondary); line-height: 1.6; }
+        .feature-card .tag { background-color: var(--brand-color); color: white; font-size: 0.8em; padding: 3px 8px; border-radius: 5px; display: inline-block; margin-left: 5px; }
 
-        .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .scroll-indicator .arrow {
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+            40% { transform: translateY(-15px) rotate(45deg); }
+            60% { transform: translateY(-7px) rotate(45deg); }
+        }
+
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: var(--brand-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+        #music-control:hover {
+            transform: scale(1.1);
+        }
+        #music-control svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .screenshot-carousel {
+            overflow: hidden;
+            padding: 20px 0;
+            position: relative;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .carousel-track {
+            display: flex;
+            width: calc(250px * 8 + 15px * 8); /* 4 images duplicated, plus gap */
+            animation: scroll 30s linear infinite;
+        }
+        .screenshot-carousel:hover .carousel-track {
+            animation-play-state: paused;
+        }
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 250px;
+            margin: 0 7.5px;
+        }
+        .gallery-img {
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 4 - 15px * 4)); } /* scroll one set of images */
+        }
+
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 5px; }
+        .lightbox .close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+
+        .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
         .modal-content { background-color: var(--section-bg); color: var(--text-primary); padding: 30px; border-radius: 8px; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative; }
         .modal-content h2 { margin-top: 0; }
         .modal-content a { color: var(--brand-color); }
         .modal .close { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
 
-        #carousel-modal { display: none; flex-direction: column; }
-        .carousel-container { position: relative; width: 100%; max-width: 600px; overflow: hidden; }
-        .carousel-track { display: flex; transition: transform 0.3s ease-in-out; }
-        .carousel-slide { flex: 0 0 100%; min-width: 100%; }
-        .carousel-slide img { width: 100%; display: block; border-radius: 8px; cursor: pointer; }
-        .carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; border: none; font-size: 2em; cursor: pointer; padding: 5px 10px; border-radius: 5px; z-index: 10; }
-        .prev { left: 10px; } .next { right: 10px; }
+        footer { background-color: #111; color: var(--text-secondary); text-align: center; padding: 20px; position: relative; z-index: 5; }
+        footer a { color: var(--brand-color); font-weight: bold; text-decoration: none; cursor: pointer; }
+        footer a:hover { text-decoration: underline; }
 
-        #lightbox-modal { display: none; background-color: rgba(0,0,0,0.9); }
-        #lightbox-modal img { max-width: 90%; max-height: 80%; }
-
-        @media (max-width: 600px) { h1 { font-size: 2.5em; } p.slogan { font-size: 1em; } .download-button { font-size: 1em; } .hero-content { padding: 15px; min-height: 450px; } .icon-button { font-size: 1.5em; width: 45px; height: 45px; line-height: 45px; } #info-display { min-height: 100px; } }
+        @media (max-width: 600px) { h1 { font-size: 2.5em; } p.slogan { font-size: 1.1em; } .download-button { font-size: 1.1em; padding: 12px 30px; } .hero-content { padding: 20px; } .content-section h2 { font-size: 2em; } }
     </style>
 </head>
 <body>
-    <div class="hero-section">
+    <header class="hero-section">
         <div class="background-stack">
             <div id="bg1" class="background-layer"></div>
             <div id="bg2" class="background-layer"></div>
@@ -81,48 +239,80 @@
             <h1>Anidroid</h1>
             <p class="slogan">Anime Online Gratis HD</p>
             <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
-            
-            <div id="info-display"></div>
-
-            <div class="icon-bar">
-                <div class="icon-button" data-feature="profile" title="Perfiles">👤</div>
-                <div class="icon-button" data-feature="playlist" title="Playlists">➕</div>
-                <div class="icon-button" data-feature="info" title="Información">ℹ️</div>
-                <div class="icon-button" data-feature="player" title="Reproductor">▶️</div>
-                <div class="icon-button" data-feature="history" title="Historial">📖</div>
-                <div class="icon-button" data-feature="gallery" title="Galería">🖼️</div>
-                <div class="icon-button" data-feature="privacy" title="Privacidad">🔒</div>
-            </div>
         </div>
-    </div>
+    </header>
 
-    <div id="lightbox-modal" class="modal">
+    <main>
+        <section id="features" class="content-section">
+            <h2>Tu Experiencia de Anime Definitiva</h2>
+            <div class="features-grid">
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><h3>Perfiles de Usuario</h3><p>Crea tu propio perfil para guardar tus preferencias y tener una experiencia personalizada.</p></div>
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/></svg></div><h3>Playlists Personalizadas</h3><p>Organiza tus animes favoritos en listas de reproducción. ¡Puedes importarlas y exportarlas fácilmente!</p></div>
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Información Detallada</h3><p>Accede a sinopsis, géneros, y más detalles de la gran mayoría de los animes disponibles.</p></div>
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Doble Reproductor</h3><p>Elige entre un reproductor nativo para máxima velocidad o un WebView como alternativa.</p></div>
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></div><h3>Historial de Visionado</h3><p>Lleva un registro de los episodios y animes que has visto. <span class="tag">Alpha</span></p></div>
+                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Anuncios Opcionales</h3><p>Disfruta de una experiencia sin interrupciones con la opción de deshabilitar los anuncios.</p></div>
+            </div>
+        </section>
+
+        <section id="screenshots" class="content-section">
+            <h2>Vistazo a la App</h2>
+            <div class="screenshot-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide"><img src="https://i.imgur.com/kOC6Ia2.png" alt="Screenshot 1" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/L4a0sO9.png" alt="Screenshot 2" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/p8cR8bV.png" alt="Screenshot 3" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/KqT5Y8Z.png" alt="Screenshot 4" class="gallery-img"></div>
+                    <!-- Duplicated for infinite effect -->
+                    <div class="carousel-slide"><img src="https://i.imgur.com/kOC6Ia2.png" alt="Screenshot 1" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/L4a0sO9.png" alt="Screenshot 2" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/p8cR8bV.png" alt="Screenshot 3" class="gallery-img"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/KqT5Y8Z.png" alt="Screenshot 4" class="gallery-img"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> Anidroid. Todos los derechos reservados. 
+        <a id="privacy-link">Política de Privacidad</a>
+    </footer>
+
+    <audio id="background-music" src="https://listen.moe/stream" preload="auto" loop></audio>
+    <button id="music-control" aria-label="Controlar música">
+        <svg id="music-icon-playing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.28 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <svg id="music-icon-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+    </button>
+
+    <div id="lightbox-modal" class="lightbox">
         <span class="close">&times;</span>
         <img id="lightbox-img">
-    </div>
-
-    <div id="carousel-modal" class="modal">
-        <span class="close">&times;</span>
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <div class="carousel-slide"><img src="Captura1.jpg" alt="Captura 1"></div>
-                <div class="carousel-slide"><img src="Captura2.jpg" alt="Captura 2"></div>
-                <div class="carousel-slide"><img src="Captura3.jpg" alt="Captura 3"></div>
-                <div class="carousel-slide"><img src="Captura4.jpg" alt="Captura 4"></div>
-                <div class="carousel-slide"><img src="Captura5.jpg" alt="Captura 5"></div>
-            </div>
-            <button class="carousel-nav prev">&lt;</button>
-            <button class="carousel-nav next">&gt;</button>
-        </div>
     </div>
 
     <div id="privacy-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Política de Privacidad de Anidroid</h2>
-            <p><strong>Última actualización:</strong> 23 de Junio de 2025</p>
-            <p>Anidroid funciona como un cliente que accede a contenido de AnimeFLV. No alojamos contenido. Usamos AppMetrica para análisis de uso seudonimizados. La app incluye anuncios que pueden ser deshabilitados. Para más detalles, contáctenos.</p>
-            <p><strong>Contacto:</strong> ydnsm60@gmail.com</p>
+            <p><strong>Última actualización:</strong> 22 de Junio de 2025</p>
+            <p>Esta política de privacidad describe cómo Anidroid maneja la información. Al usar nuestra aplicación, aceptas las prácticas descritas aquí.</p>
+            <h3>1. Fuente del Contenido y Relación con Terceros</h3>
+            <p>Anidroid funciona como un cliente o navegador que accede a contenido audiovisual disponible públicamente en el sitio web de AnimeFLV. No alojamos, distribuimos ni somos propietarios de ningún contenido. La aplicación simplemente facilita el acceso a dicho contenido de una manera organizada.</p>
+            <h3>2. Recopilación de Información</h3>
+            <p>Para mejorar la aplicación, utilizamos servicios de análisis de terceros:</p>
+            <ul>
+                <li><strong>Yandex AppMetrica:</strong> Recopilamos datos técnicos y de uso de forma seudonimizada, como el tipo de dispositivo, la versión del sistema operativo, informes de errores y eventos de interacción (por ejemplo, qué funciones se usan más). Esto nos ayuda a entender cómo se usa la app, corregir errores y mejorar la experiencia. No recopilamos información de identificación personal como su nombre o correo electrónico. Puede consultar la política de Yandex en <a href="https://yandex.com/legal/metrica_privacy/" target="_blank">su sitio web</a>.</li>
+            </ul>
+            <h3>3. Publicidad</h3>
+            <p>Anidroid muestra anuncios de redes de terceros para mantener la aplicación gratuita. Estos servicios de publicidad pueden recopilar sus propios datos anónimos para mostrar anuncios relevantes. Ofrecemos una opción dentro de la aplicación para deshabilitar estos anuncios.</p>
+            <h3>4. Permisos de la Aplicación</h3>
+            <p>La aplicación puede solicitar permisos para instalar aplicaciones (para actualizaciones) y acceder al almacenamiento (para importar/exportar listas). Estos permisos solo se utilizan para las funciones descritas y no para otros fines.</p>
+            <h3>5. Seguridad de los Datos</h3>
+            <p>Tomamos medidas razonables para proteger la información técnica que se recopila, pero ninguna medida de seguridad es 100% infalible. El acceso a los datos de análisis está restringido y protegido.</p>
+            <h3>6. Cambios a esta Política</h3>
+            <p>Podemos actualizar esta política de privacidad ocasionalmente. Le notificaremos de cualquier cambio publicando la nueva política en esta sección.</p>
+            <h3>7. Contacto</h3>
+            <p>Si tiene alguna pregunta sobre esta política de privacidad, puede contactarnos en: ydnsm60@gmail.com</p>
         </div>
     </div>
 
@@ -130,8 +320,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- Background Image Cycler --- //
             const bgLayers = [document.getElementById('bg1'), document.getElementById('bg2')];
-            let currentLayer = 0, isFetching = false;
+            let currentLayer = 0;
             const imageQueue = [];
+            let isFetching = false;
             const API_URL = 'https://api.waifu.pics/sfw/waifu';
 
             const fillImageQueue = async () => {
@@ -142,7 +333,7 @@
                     const results = await Promise.all(promises);
                     results.forEach(data => { if (data.url) imageQueue.push(data.url); });
                 } catch (error) { console.error('Error fetching images:', error); }
-                finally { isFetching = false; if (!bgLayers[0].style.backgroundImage) cycleImage(); }
+                finally { isFetching = false; if (bgLayers[0].style.backgroundImage === '') cycleImage(); }
             };
 
             const cycleImage = () => {
@@ -160,72 +351,97 @@
                 };
                 img.onerror = () => { console.error('Error loading image:', nextImageUrl); cycleImage(); };
             };
-            fillImageQueue(); setInterval(cycleImage, 6000);
+            fillImageQueue();
+            setInterval(cycleImage, 6000);
 
-            // --- Interactive Features --- //
-            const infoDisplay = document.getElementById('info-display');
-            const iconBar = document.querySelector('.icon-bar');
-            const icons = document.querySelectorAll('.icon-button');
-            const featureData = {
-                profile: { title: 'Perfiles de Usuario', text: 'Crea tu propio perfil para guardar tus preferencias y tener una experiencia personalizada.' },
-                playlist: { title: 'Playlists Personalizadas', text: 'Organiza tus animes favoritos en listas de reproducción. ¡Puedes importarlas y exportarlas fácilmente!' },
-                info: { title: 'Información Detallada', text: 'Accede a sinopsis, géneros, y más detalles de la gran mayoría de los animes disponibles.' },
-                player: { title: 'Doble Reproductor', text: 'Elige entre un reproductor nativo para máxima velocidad o un WebView como alternativa (puede causar inestabilidad).' },
-                history: { title: 'Historial de Visionado', text: 'Lleva un registro de los episodios y animes que has visto. <span class="tag">Alpha</span>' }
-            };
+            // --- Footer Year --- //
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-            iconBar.addEventListener('click', (e) => {
-                const button = e.target.closest('.icon-button');
-                if (!button) return;
+            // --- Scroll Animations --- //
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.content-section').forEach(section => observer.observe(section));
 
-                const feature = button.dataset.feature;
-                icons.forEach(icon => icon.classList.remove('active'));
-                button.classList.add('active');
+            // --- Lightbox Modal --- //
+            const lightbox = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-img');
+            const closeLightbox = lightbox.querySelector('.close');
 
-                if (featureData[feature]) {
-                    const data = featureData[feature];
-                    infoDisplay.innerHTML = `<h3>${data.title}</h3><p>${data.text}</p>`;
-                    infoDisplay.style.display = 'block';
-                } else {
-                    infoDisplay.style.display = 'none';
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightbox.style.display = 'flex';
+                    lightboxImg.src = img.src;
+                });
+            });
+            closeLightbox.addEventListener('click', () => { lightbox.style.display = 'none'; });
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+
+            // --- Privacy Policy Modal --- //
+            const privacyModal = document.getElementById('privacy-modal');
+            const privacyLink = document.getElementById('privacy-link');
+            const closePrivacy = privacyModal.querySelector('.close');
+
+            privacyLink.addEventListener('click', (e) => { e.preventDefault(); privacyModal.style.display = 'flex'; });
+            closePrivacy.addEventListener('click', () => { privacyModal.style.display = 'none'; });
+            privacyModal.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.style.display = 'none'; });
+
+            // Scroll Indicator Logic
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 20) {
+                        scrollIndicator.classList.add('hidden');
+                    } else {
+                        scrollIndicator.classList.remove('hidden');
+                    }
+                }, { passive: true });
+
+                scrollIndicator.addEventListener('click', () => {
+                    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // Background Music Logic
+            const music = document.getElementById('background-music');
+            const musicControl = document.getElementById('music-control');
+            const iconPlaying = document.getElementById('music-icon-playing');
+            const iconMuted = document.getElementById('music-icon-muted');
+
+            if (music && musicControl) {
+                music.volume = 0.25;
+
+                let playPromise = music.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        iconPlaying.style.display = 'block';
+                        iconMuted.style.display = 'none';
+                    }).catch(error => {
+                        console.log("La reproducción automática fue prevenida. Se necesita interacción del usuario.");
+                        iconPlaying.style.display = 'none';
+                        iconMuted.style.display = 'block';
+                        music.muted = true;
+                    });
                 }
 
-                if (feature === 'gallery') openModal('carousel-modal');
-                if (feature === 'privacy') openModal('privacy-modal');
-            });
-
-            // --- Modal Handling --- //
-            const openModal = (id) => document.getElementById(id).style.display = 'flex';
-            const closeModal = (modal) => modal.style.display = 'none';
-
-            document.querySelectorAll('.modal .close').forEach(btn => btn.addEventListener('click', (e) => closeModal(e.target.closest('.modal'))));
-            document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); }));
-
-            // --- Carousel --- //
-            const track = document.querySelector('.carousel-track');
-            const slides = Array.from(track.children);
-            const nextButton = document.querySelector('.carousel-nav.next');
-            const prevButton = document.querySelector('.carousel-nav.prev');
-            let currentIndex = 0;
-
-            const updateSlidePosition = () => { track.style.transform = `translateX(-${currentIndex * 100}%)`; };
-            nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateSlidePosition(); });
-            prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidePosition(); });
-            
-            track.addEventListener('click', (e) => {
-                if(e.target.tagName === 'IMG') {
-                    document.getElementById('lightbox-img').src = e.target.src;
-                    openModal('lightbox-modal');
-                }
-            });
-
-            let touchStartX = 0;
-            track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-            track.addEventListener('touchend', e => {
-                const touchEndX = e.changedTouches[0].clientX;
-                if (touchStartX - touchEndX > 50) nextButton.click();
-                if (touchEndX - touchStartX > 50) prevButton.click();
-            });
+                musicControl.addEventListener('click', () => {
+                    if (music.paused || music.muted) {
+                        music.muted = false;
+                        music.play();
+                        iconPlaying.style.display = 'block';
+                        iconMuted.style.display = 'none';
+                    } else {
+                        music.pause();
+                        iconPlaying.style.display = 'none';
+                        iconMuted.style.display = 'block';
+                    }
+                });
+            }
         });
     </script>
 </body>
