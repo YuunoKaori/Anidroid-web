@@ -163,11 +163,14 @@
         }
 
         #music-control {
+            margin: 0;
+            padding: 0;
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 100;
             background-color: #22222277;
+            border-style: none;
             color: white;
             border-radius: 5px;
             width: 50px;
@@ -186,7 +189,7 @@
             padding: 10px 15px;
         }
         #volume-display {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             color: white;
             margin-right: 8px;
@@ -453,7 +456,7 @@
             const volumeDisplay = document.getElementById('volume-display');
 
             if (music && musicControl) {
-                const volumeLevels = [0.1, 0.5, 1.0, 0]; // 0 represents mute
+                const volumeLevels = [0.2, 0]; // 0 represents mute
                 let volumeIndex = 0; // Attempt to start at 10% volume
 
                 const setVolume = (levelIndex, useFadeIn = false) => {
@@ -475,7 +478,7 @@
                                 console.error("Playback was prevented. Reverting to muted state.", e);
                                 // If autoplay fails, revert UI to muted state
                                 music.muted = true;
-                                setVolume(3); // Set to muted state
+                                setVolume(1); // Set to muted state
                             });
                         }
 
