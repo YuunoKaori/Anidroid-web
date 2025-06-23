@@ -9,208 +9,127 @@
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
         :root {
-            /* Dark Theme (Default) */
-            --brand-color: #f47521;
-            --brand-hover: #fb8c00;
-            --bg-color: #0d0d0d;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --container-bg: rgba(10, 10, 10, 0.6);
-            --section-bg: #1a1a1a;
-            --logo-bg: transparent;
+            --brand-color: #f47521; --brand-hover: #fb8c00; --bg-color: #0d0d0d;
+            --text-primary: #ffffff; --text-secondary: #cccccc; --container-bg: rgba(10, 10, 10, 0.7);
+            --section-bg: rgba(26, 26, 26, 0.8); --logo-bg: transparent;
             --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.9) 15%, rgba(0, 0, 0, 0.25) 70%);
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f0f2f5;
-                --text-primary: #1c1e21;
-                --text-secondary: #555555;
-                --container-bg: rgba(255, 255, 255, 0.65);
-                --section-bg: #ffffff;
-                --logo-bg: rgba(0, 0, 0, 0.15); /* Fondo más oscuro para el logo en tema claro */
+                --bg-color: #f0f2f5; --text-primary: #1c1e21; --text-secondary: #555555;
+                --container-bg: rgba(255, 255, 255, 0.75); --section-bg: rgba(255, 255, 255, 0.9);
+                --logo-bg: rgba(0, 0, 0, 0.15);
                 --overlay-gradient: linear-gradient(to top, rgba(240, 242, 245, 0.8) 15%, rgba(240, 242, 245, 0.2) 70%);
             }
         }
 
-        @keyframes kenburns-subtle {
-            0% { transform: scale(1.05) translate(0, 0); }
-            100% { transform: scale(1.08) translate(-1%, 1%); }
-        }
+        @keyframes kenburns-subtle { 0% { transform: scale(1.05) translate(0, 0); } 100% { transform: scale(1.08) translate(-1%, 1%); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); } 100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); } }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); }
-        }
+        body, html { margin: 0; font-family: 'Lato', sans-serif; color: var(--text-primary); background-color: var(--bg-color); overflow: hidden; height: 100%; }
 
-        body, html {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-            color: var(--text-primary);
-            background-color: var(--bg-color);
-        }
-
-        .hero-section {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .background-stack {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .background-layer {
-            position: absolute;
-            width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            animation: kenburns-subtle 45s ease-in-out infinite alternate;
-        }
-
+        .hero-section { height: 100%; position: relative; display: flex; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; }
+        .background-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; border-radius: 15px; overflow: hidden; }
+        .background-layer { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; animation: kenburns-subtle 45s ease-in-out infinite alternate; }
         .background-layer.visible { opacity: 1; z-index: 2; }
-        .background-layer::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--overlay-gradient);
-        }
+        .background-layer::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-gradient); }
 
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 550px;
-            text-align: center;
-            background: var(--container-bg);
-            padding: 30px 40px;
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo { width: 100px; height: 100px; margin-bottom: 15px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
-        h1 { font-size: 3.5em; font-weight: 900; margin: 0 0 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
-        p.slogan { font-size: 1.3em; font-weight: 700; line-height: 1.5; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .download-button { display: inline-block; background-color: var(--brand-color); color: var(--text-primary); padding: 15px 40px; text-decoration: none; font-size: 1.3em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; }
+        .hero-content { display: flex; flex-direction: column; position: relative; z-index: 3; width: 100%; max-width: 600px; height: 90vh; max-height: 700px; text-align: center; background: var(--container-bg); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .main-info { flex-shrink: 0; }
+        .logo { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
+        h1 { font-size: 3em; font-weight: 900; margin: 0 0 5px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
+        p.slogan { font-size: 1.1em; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .download-button { display: inline-block; background-color: var(--brand-color); color: var(--text-primary); padding: 12px 35px; text-decoration: none; font-size: 1.2em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; }
         .download-button:hover { background-color: var(--brand-hover); transform: scale(1.05); }
 
-        main { background-color: var(--section-bg); padding-bottom: 80px; }
-        .content-section { max-width: 1200px; margin: 0 auto; padding: 60px 20px; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .content-section.visible { opacity: 1; transform: translateY(0); }
-        .content-section h2 { font-size: 2.5em; text-align: center; margin-bottom: 40px; font-weight: 900; }
+        .info-switcher { margin-top: 20px; background: var(--section-bg); border-radius: 8px; padding: 15px; flex-grow: 1; min-height: 0; display: flex; flex-direction: column; }
+        .tabs { display: flex; border-bottom: 1px solid var(--brand-color); flex-shrink: 0; }
+        .tab-link { background: none; border: none; color: var(--text-secondary); padding: 10px 15px; cursor: pointer; font-size: 1em; font-weight: 700; transition: color 0.3s, border-bottom 0.3s; border-bottom: 3px solid transparent; }
+        .tab-link.active { color: var(--brand-color); border-bottom-color: var(--brand-color); }
+        .tab-content { display: none; padding-top: 15px; text-align: left; overflow-y: auto; flex-grow: 1; }
+        .tab-content.active { display: block; }
 
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { text-align: center; padding: 20px; }
-        .feature-card .icon { font-size: 3em; color: var(--brand-color); margin-bottom: 15px; }
-        .feature-card h3 { font-size: 1.5em; margin-bottom: 10px; }
-        .feature-card p { color: var(--text-secondary); line-height: 1.6; }
-        .feature-card .tag { background-color: var(--brand-color); color: white; font-size: 0.8em; padding: 3px 8px; border-radius: 5px; display: inline-block; margin-left: 5px; }
+        .features-list { list-style: none; padding: 0; margin: 0; }
+        .features-list li { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9em; }
+        .features-list .icon { font-size: 1.5em; color: var(--brand-color); margin-right: 15px; width: 25px; text-align: center; }
+        .features-list .tag { background-color: var(--brand-color); color: white; font-size: 0.7em; padding: 2px 6px; border-radius: 5px; display: inline-block; margin-left: 5px; }
 
-        .gallery-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .gallery-img { width: 100%; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .gallery-img:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .gallery-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+        .gallery-img { width: 100%; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease; }
+        .gallery-img:hover { transform: scale(1.08); }
 
-        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 5px; }
-        .lightbox .close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+        #audio-control { position: fixed; top: 25px; right: 25px; z-index: 1001; cursor: pointer; width: 40px; height: 40px; background-color: rgba(0,0,0,0.5); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 20px; transition: background-color 0.3s; }
+        #audio-control:hover { background-color: var(--brand-color); }
+        #audio-control.muted::after { content: '🔇'; }
+        #audio-control:not(.muted)::after { content: '🔊'; }
 
-        .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
-        .modal-content { background-color: var(--section-bg); color: var(--text-primary); padding: 30px; border-radius: 8px; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative; }
-        .modal-content h2 { margin-top: 0; }
-        .modal-content a { color: var(--brand-color); }
-        .modal .close { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
-
-        footer { background-color: #111; color: var(--text-secondary); text-align: center; padding: 20px; position: relative; z-index: 5; }
+        footer { position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 0.9em; padding: 5px; z-index: 4; color: var(--text-secondary); }
         footer a { color: var(--brand-color); font-weight: bold; text-decoration: none; cursor: pointer; }
         footer a:hover { text-decoration: underline; }
 
-        @media (max-width: 600px) { h1 { font-size: 2.5em; } p.slogan { font-size: 1.1em; } .download-button { font-size: 1.1em; padding: 12px 30px; } .hero-content { padding: 20px; } .content-section h2 { font-size: 2em; } }
+        .lightbox, .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 5px; }
+        .lightbox .close, .modal .close { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; font-weight: bold; cursor: pointer; }
+        .modal-content { background-color: var(--section-bg); color: var(--text-primary); padding: 30px; border-radius: 8px; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal-content h2 { margin-top: 0; }
+        .modal-content a { color: var(--brand-color); }
+
+        @media (max-width: 600px), (max-height: 680px) { h1 { font-size: 2.2em; } p.slogan { font-size: 1em; margin-bottom: 15px; } .logo { width: 70px; height: 70px; } .download-button { padding: 10px 25px; font-size: 1em; } .hero-content { padding: 15px; height: 95vh; } .info-switcher { margin-top: 15px; } }
     </style>
 </head>
 <body>
-    <header class="hero-section">
+    <div class="hero-section">
         <div class="background-stack">
             <div id="bg1" class="background-layer"></div>
             <div id="bg2" class="background-layer"></div>
         </div>
         <div class="hero-content">
-            <img src="logo.png" alt="Anidroid Logo" class="logo">
-            <h1>Anidroid</h1>
-            <p class="slogan">Anime Online Gratis HD</p>
-            <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
+            <div class="main-info">
+                <img src="logo.png" alt="Anidroid Logo" class="logo">
+                <h1>Anidroid</h1>
+                <p class="slogan">Anime Online Gratis HD</p>
+                <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
+            </div>
+            <div class="info-switcher">
+                <div class="tabs">
+                    <button class="tab-link active" data-tab="features">Características</button>
+                    <button class="tab-link" data-tab="screenshots">Capturas</button>
+                </div>
+                <div id="features" class="tab-content active">
+                    <ul class="features-list">
+                        <li><span class="icon">👤</span> Perfiles de Usuario para una experiencia personalizada.</li>
+                        <li><span class="icon">➕</span> Playlists personalizables (importar/exportar).</li>
+                        <li><span class="icon">ℹ️</span> Información detallada de tus animes favoritos.</li>
+                        <li><span class="icon">▶️</span> Doble reproductor: Nativo y WebView.</li>
+                        <li><span class="icon">📖</span> Historial de visionado. <span class="tag">Alpha</span></li>
+                        <li><span class="icon">🚫</span> Anuncios opcionales que puedes deshabilitar.</li>
+                    </ul>
+                </div>
+                <div id="screenshots" class="tab-content">
+                    <div class="gallery-container">
+                        <img src="Captura1.jpg" alt="Captura 1" class="gallery-img"><img src="Captura2.jpg" alt="Captura 2" class="gallery-img"><img src="Captura3.jpg" alt="Captura 3" class="gallery-img"><img src="Captura4.jpg" alt="Captura 4" class="gallery-img"><img src="Captura5.jpg" alt="Captura 5" class="gallery-img">
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <section id="features" class="content-section">
-            <h2>Tu Experiencia de Anime Definitiva</h2>
-            <div class="features-grid">
-                <div class="feature-card"><div class="icon">👤</div><h3>Perfiles de Usuario</h3><p>Crea tu propio perfil para guardar tus preferencias y tener una experiencia personalizada.</p></div>
-                <div class="feature-card"><div class="icon">➕</div><h3>Playlists Personalizadas</h3><p>Organiza tus animes favoritos en listas de reproducción. ¡Puedes importarlas y exportarlas fácilmente!</p></div>
-                <div class="feature-card"><div class="icon">ℹ️</div><h3>Información Detallada</h3><p>Accede a sinopsis, géneros, y más detalles de la gran mayoría de los animes disponibles.</p></div>
-                <div class="feature-card"><div class="icon">▶️</div><h3>Doble Reproductor</h3><p>Elige entre un reproductor nativo para máxima velocidad o un WebView como alternativa.</p></div>
-                <div class="feature-card"><div class="icon">📖</div><h3>Historial de Visionado</h3><p>Lleva un registro de los episodios y animes que has visto. <span class="tag">Alpha</span></p></div>
-                <div class="feature-card"><div class="icon">🚫</div><h3>Anuncios Opcionales</h3><p>Disfruta de una experiencia sin interrupciones con la opción de deshabilitar los anuncios.</p></div>
-            </div>
-        </section>
-
-        <section id="screenshots" class="content-section">
-            <h2>Así se ve Anidroid</h2>
-            <div class="gallery-container">
-                <img src="Captura1.jpg" alt="Captura de pantalla 1" class="gallery-img">
-                <img src="Captura2.jpg" alt="Captura de pantalla 2" class="gallery-img">
-                <img src="Captura3.jpg" alt="Captura de pantalla 3" class="gallery-img">
-                <img src="Captura4.jpg" alt="Captura de pantalla 4" class="gallery-img">
-                <img src="Captura5.jpg" alt="Captura de pantalla 5" class="gallery-img">
-            </div>
-        </section>
-    </main>
+    <div id="audio-control" class="muted"></div>
+    <audio id="background-music" src="https://www.chosic.com/wp-content/uploads/2022/01/Kyoto.mp3" loop></audio>
 
     <footer>
-        &copy; <span id="year"></span> Anidroid. Todos los derechos reservados. 
+        &copy; <span id="year"></span> Anidroid. 
         <a id="privacy-link">Política de Privacidad</a>
     </footer>
 
-    <div id="lightbox-modal" class="lightbox">
-        <span class="close">&times;</span>
-        <img id="lightbox-img">
-    </div>
-
+    <div id="lightbox-modal" class="lightbox"><span class="close">&times;</span><img id="lightbox-img"></div>
     <div id="privacy-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Política de Privacidad de Anidroid</h2>
-            <p><strong>Última actualización:</strong> 22 de Junio de 2025</p>
-            <p>Esta política de privacidad describe cómo Anidroid maneja la información. Al usar nuestra aplicación, aceptas las prácticas descritas aquí.</p>
-            <h3>1. Fuente del Contenido y Relación con Terceros</h3>
-            <p>Anidroid funciona como un cliente o navegador que accede a contenido audiovisual disponible públicamente en el sitio web de AnimeFLV. No alojamos, distribuimos ni somos propietarios de ningún contenido. La aplicación simplemente facilita el acceso a dicho contenido de una manera organizada.</p>
-            <h3>2. Recopilación de Información</h3>
-            <p>Para mejorar la aplicación, utilizamos servicios de análisis de terceros:</p>
-            <ul>
-                <li><strong>Yandex AppMetrica:</strong> Recopilamos datos técnicos y de uso de forma seudonimizada, como el tipo de dispositivo, la versión del sistema operativo, informes de errores y eventos de interacción (por ejemplo, qué funciones se usan más). Esto nos ayuda a entender cómo se usa la app, corregir errores y mejorar la experiencia. No recopilamos información de identificación personal como su nombre o correo electrónico. Puede consultar la política de Yandex en <a href="https://yandex.com/legal/metrica_privacy/" target="_blank">su sitio web</a>.</li>
-            </ul>
-            <h3>3. Publicidad</h3>
-            <p>Anidroid muestra anuncios de redes de terceros para mantener la aplicación gratuita. Estos servicios de publicidad pueden recopilar sus propios datos anónimos para mostrar anuncios relevantes. Ofrecemos una opción dentro de la aplicación para deshabilitar estos anuncios.</p>
-            <h3>4. Permisos de la Aplicación</h3>
-            <p>La aplicación puede solicitar permisos para instalar aplicaciones (para actualizaciones) y acceder al almacenamiento (para importar/exportar listas). Estos permisos solo se utilizan para las funciones descritas y no para otros fines.</p>
-            <h3>5. Seguridad de los Datos</h3>
-            <p>Tomamos medidas razonables para proteger la información técnica que se recopila, pero ninguna medida de seguridad es 100% infalible. El acceso a los datos de análisis está restringido y protegido.</p>
-            <h3>6. Cambios a esta Política</h3>
-            <p>Podemos actualizar esta política de privacidad ocasionalmente. Le notificaremos de cualquier cambio publicando la nueva política en esta sección.</p>
-            <h3>7. Contacto</h3>
-            <p>Si tiene alguna pregunta sobre esta política de privacidad, puede contactarnos en: ydnsm60@gmail.com</p>
+            <p><strong>Última actualización:</strong> 23 de Junio de 2025</p>
+            <p>Anidroid funciona como un cliente que accede a contenido de AnimeFLV. No alojamos contenido. Para análisis, usamos Yandex AppMetrica, que recopila datos técnicos seudonimizados. La app incluye anuncios opcionales que pueden ser deshabilitados. Para más detalles, contáctenos en ydnsm60@gmail.com.</p>
         </div>
     </div>
 
@@ -218,9 +137,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- Background Image Cycler --- //
             const bgLayers = [document.getElementById('bg1'), document.getElementById('bg2')];
-            let currentLayer = 0;
-            const imageQueue = [];
-            let isFetching = false;
+            let currentLayer = 0, imageQueue = [], isFetching = false;
             const API_URL = 'https://api.waifu.pics/sfw/waifu';
 
             const fillImageQueue = async () => {
@@ -255,39 +172,51 @@
             // --- Footer Year --- //
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // --- Scroll Animations --- //
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.content-section').forEach(section => observer.observe(section));
-
-            // --- Lightbox Modal --- //
-            const lightbox = document.getElementById('lightbox-modal');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const galleryImages = document.querySelectorAll('.gallery-img');
-            const closeLightbox = lightbox.querySelector('.close');
-
-            galleryImages.forEach(img => {
-                img.addEventListener('click', () => {
-                    lightbox.style.display = 'flex';
-                    lightboxImg.src = img.src;
+            // --- Tab Switcher --- //
+            const tabs = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+                    const target = document.getElementById(tab.dataset.tab);
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    target.classList.add('active');
                 });
             });
-            closeLightbox.addEventListener('click', () => { lightbox.style.display = 'none'; });
-            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; });
 
-            // --- Privacy Policy Modal --- //
-            const privacyModal = document.getElementById('privacy-modal');
-            const privacyLink = document.getElementById('privacy-link');
-            const closePrivacy = privacyModal.querySelector('.close');
+            // --- Lightbox & Privacy Modals --- //
+            const setupModal = (modalId, triggerId, isLink) => {
+                const modal = document.getElementById(modalId);
+                const trigger = document.getElementById(triggerId);
+                const closeBtn = modal.querySelector('.close');
+                trigger.addEventListener('click', (e) => { if(isLink) e.preventDefault(); modal.style.display = 'flex'; });
+                closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+            };
+            setupModal('privacy-modal', 'privacy-link', true);
+            const lightbox = document.getElementById('lightbox-modal');
+            document.querySelectorAll('.gallery-img').forEach(img => {
+                img.addEventListener('click', () => {
+                    lightbox.style.display = 'flex';
+                    document.getElementById('lightbox-img').src = img.src;
+                });
+            });
+            lightbox.querySelector('.close').addEventListener('click', () => { lightbox.style.display = 'none'; });
 
-            privacyLink.addEventListener('click', (e) => { e.preventDefault(); privacyModal.style.display = 'flex'; });
-            closePrivacy.addEventListener('click', () => { privacyModal.style.display = 'none'; });
-            privacyModal.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.style.display = 'none'; });
+            // --- Background Music --- //
+            const audioControl = document.getElementById('audio-control');
+            const music = document.getElementById('background-music');
+            music.volume = 0.25;
+            audioControl.addEventListener('click', () => {
+                if (music.paused) {
+                    music.play().catch(e => console.error("Audio play failed:", e));
+                    audioControl.classList.remove('muted');
+                } else {
+                    music.pause();
+                    audioControl.classList.add('muted');
+                }
+            });
         });
     </script>
 </body>
