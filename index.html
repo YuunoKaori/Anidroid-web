@@ -10,8 +10,8 @@
 
         :root {
             /* Dark Theme (Default) */
-            --brand-color: #f47521;
-            --brand-hover: #fb8c00;
+            --brand-color: #00d1ff; /* Cyan */
+            --brand-hover: #00b8e6; /* Darker Cyan */
             --bg-color: #0d0d0d;
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
@@ -39,9 +39,9 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(244, 117, 33, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(244, 117, 33, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 209, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 209, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 209, 255, 0); }
         }
 
         body, html {
@@ -49,6 +49,17 @@
             font-family: 'Lato', sans-serif;
             color: var(--text-primary);
             background-color: var(--bg-color);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--brand-color);
+            width: 0%;
+            z-index: 2000;
+            transition: width 0.1s linear;
         }
 
         .hero-section {
@@ -103,7 +114,7 @@
         .logo { width: 100px; height: 100px; margin-bottom: 15px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
         h1 { font-size: 3.5em; font-weight: 900; margin: 0 0 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
         p.slogan { font-size: 1.3em; font-weight: 700; line-height: 1.5; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .download-button { display: inline-block; background-color: var(--brand-color); color: var(--text-primary); padding: 15px 40px; text-decoration: none; font-size: 1.3em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; }
+        .download-button { display: inline-block; border: 2px solid var(--brand-color); color: var(--text-primary); padding: 15px 40px; text-decoration: none; font-size: 1.3em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: pulse 2.5s infinite; }
         .download-button:hover { background-color: var(--brand-hover); transform: scale(1.05); }
 
         main { background-color: var(--section-bg); padding-bottom: 80px; }
@@ -229,6 +240,7 @@
     </style>
 </head>
 <body>
+    <div class="progress-bar"></div>
     <header class="hero-section">
         <div class="background-stack">
             <div id="bg1" class="background-layer"></div>
@@ -408,6 +420,16 @@
                 });
             }
 
+            // Scroll Progress Bar
+            const progressBar = document.querySelector('.progress-bar');
+            window.addEventListener('scroll', () => {
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = (window.scrollY / scrollableHeight) * 100;
+                if (progressBar) {
+                    progressBar.style.width = `${scrolled}%`;
+                }
+            });
+
             // Background Music Logic
             const music = document.getElementById('background-music');
             const musicControl = document.getElementById('music-control');
@@ -415,7 +437,9 @@
             const iconMuted = document.getElementById('music-icon-muted');
 
             if (music && musicControl) {
-                music.volume = 0.25;
+                const volumeLevels = [0.1, 0.5, 1.0]; // 10%, 50%, 100%
+                let currentVolumeIndex = 0;
+                music.volume = volumeLevels[currentVolumeIndex];
 
                 let playPromise = music.play();
                 if (playPromise !== undefined) {
@@ -424,22 +448,32 @@
                         iconMuted.style.display = 'none';
                     }).catch(error => {
                         console.log("La reproducción automática fue prevenida. Se necesita interacción del usuario.");
+                        music.muted = true;
                         iconPlaying.style.display = 'none';
                         iconMuted.style.display = 'block';
-                        music.muted = true;
                     });
                 }
 
                 musicControl.addEventListener('click', () => {
-                    if (music.paused || music.muted) {
+                    if (music.muted) {
                         music.muted = false;
-                        music.play();
+                        music.volume = volumeLevels[currentVolumeIndex]; // Restore volume
                         iconPlaying.style.display = 'block';
                         iconMuted.style.display = 'none';
                     } else {
-                        music.pause();
-                        iconPlaying.style.display = 'none';
-                        iconMuted.style.display = 'block';
+                        currentVolumeIndex = (currentVolumeIndex + 1);
+                        if (currentVolumeIndex < volumeLevels.length) {
+                            music.volume = volumeLevels[currentVolumeIndex];
+                        } else {
+                            // Mute after last level
+                            currentVolumeIndex = 0; // Reset for next unmute
+                            music.muted = true;
+                            iconPlaying.style.display = 'none';
+                            iconMuted.style.display = 'block';
+                        }
+                    }
+                    if (music.paused) {
+                        music.play();
                     }
                 });
             }
