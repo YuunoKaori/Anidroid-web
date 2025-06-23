@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,10 @@
 
         :root {
             /* Dark Theme (Default) */
-            --brand-color: #00d1ff; /* Cyan */
-            --brand-hover: #00d1ff; /* Darker Cyan */
+            --brand-color: #00d1ff;
+            /* Cyan */
+            --brand-hover: #00d1ff;
+            /* Darker Cyan */
             --bg-color: #0d0d0d;
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
@@ -28,23 +31,38 @@
                 --text-secondary: #555555;
                 --container-bg: rgba(255, 255, 255, 0.65);
                 --section-bg: #ffffff;
-                --logo-bg: rgba(0, 0, 0, 0.15); /* Fondo más oscuro para el logo en tema claro */
+                --logo-bg: rgba(0, 0, 0, 0.15);
+                /* Fondo más oscuro para el logo en tema claro */
                 --overlay-gradient: linear-gradient(to top, rgba(240, 242, 245, 0.8) 15%, rgba(240, 242, 245, 0.2) 70%);
             }
         }
 
         @keyframes kenburns-subtle {
-            0% { transform: scale(1.05) translate(0, 0); }
-            100% { transform: scale(1.08) translate(-1%, 1%); }
+            0% {
+                transform: scale(1.05) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.08) translate(-1%, 1%);
+            }
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 209, 255, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 209, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 209, 255, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 209, 255, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 209, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 209, 255, 0);
+            }
         }
 
-        body, html {
+        body,
+        html {
             margin: 0;
             font-family: 'Lato', sans-serif;
             color: var(--text-primary);
@@ -75,7 +93,10 @@
 
         .background-stack {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
             border-radius: 15px;
             overflow: hidden;
@@ -83,7 +104,8 @@
 
         .background-layer {
             position: absolute;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
             opacity: 0;
@@ -91,11 +113,18 @@
             animation: kenburns-subtle 45s ease-in-out infinite alternate;
         }
 
-        .background-layer.visible { opacity: 1; z-index: 2; }
+        .background-layer.visible {
+            opacity: 1;
+            z-index: 2;
+        }
+
         .background-layer::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--overlay-gradient);
         }
 
@@ -111,24 +140,123 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .logo { width: 100px; height: 100px; margin-bottom: 15px; border-radius: 22px; border: 3px solid var(--brand-color); box-shadow: 0 0 40px #00d1ff; background-color: var(--logo-bg); padding: 5px; box-sizing: border-box; }
-        h1 { font-size: 3.5em; font-weight: 900; margin: 0 0 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
-        p.slogan { font-size: 1.3em; font-weight: 700; line-height: 1.5; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .download-button { box-shadow: 0 0 40px #00d1ff; display: inline-block; border: 2px solid var(--brand-color); color: var(--text-primary); padding: 15px 40px; text-decoration: none; font-size: 1.3em; font-weight: 700; border-radius: 8px; transition: transform 0.2s ease, background-color 0.3s ease; text-transform: uppercase; animation: pulse 3s infinite; }
-        .download-button:hover { box-shadow: 0 0 40px #00d1ff; background-color: var(--brand-color); transform: scale(1.02); }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            border-radius: 22px;
+            border: 3px solid var(--brand-color);
+            box-shadow: 0 0 30px #00d1ff;
+            background-color: var(--logo-bg);
+            padding: 5px;
+            box-sizing: border-box;
+        }
 
-        main { background-color: var(--section-bg); padding-bottom: 80px; }
-        .content-section { max-width: 1200px; margin: 0 auto; padding: 60px 20px; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .content-section.visible { opacity: 1; transform: translateY(0); }
-        .content-section h2 { font-size: 2.5em; text-align: center; margin-bottom: 40px; font-weight: 900; }
+        h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin: 0 0 10px;
+        }
 
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { text-align: center; padding: 20px; }
-        .feature-card .icon { display: inline-block; width: 64px; height: 64px; margin-bottom: 15px; }
-        .feature-card .icon svg { fill: var(--brand-color); width: 100%; height: 100%; }
-        .feature-card h3 { font-size: 1.5em; margin-bottom: 10px; }
-        .feature-card p { color: var(--text-secondary); line-height: 1.6; }
-        .feature-card .tag { background-color: var(--brand-color); color: white; font-size: 0.8em; padding: 3px 8px; border-radius: 5px; display: inline-block; margin-left: 5px; }
+        p.slogan {
+            font-size: 1.3em;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-button {
+            box-shadow: 0 0 40px #00d1ff;
+            display: inline-block;
+            border: 2px solid var(--brand-color);
+            color: var(--text-primary);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            text-transform: uppercase;
+            animation: pulse 3s infinite;
+        }
+
+        .download-button:hover {
+            box-shadow: 0 0 40px #00d1ff;
+            background-color: var(--brand-color);
+            transform: scale(1.02);
+        }
+
+        main {
+            background-color: var(--section-bg);
+            padding-bottom: 80px;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 900;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-card .icon {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card .icon svg {
+            fill: var(--brand-color);
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .feature-card .tag {
+            background-color: var(--brand-color);
+            color: white;
+            font-size: 0.8em;
+            padding: 3px 8px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-left: 5px;
+        }
 
         .scroll-indicator {
             position: absolute;
@@ -140,10 +268,12 @@
             transition: opacity 0.5s ease;
             cursor: pointer;
         }
+
         .scroll-indicator.hidden {
             opacity: 0;
             pointer-events: none;
         }
+
         .scroll-indicator .arrow {
             width: 20px;
             height: 20px;
@@ -153,10 +283,24 @@
             transform: rotate(45deg);
             animation: bounce 2s infinite;
         }
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-            40% { transform: translateY(-15px) rotate(45deg); }
-            60% { transform: translateY(-7px) rotate(45deg); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) rotate(45deg);
+            }
+
+            40% {
+                transform: translateY(-15px) rotate(45deg);
+            }
+
+            60% {
+                transform: translateY(-7px) rotate(45deg);
+            }
         }
 
         #music-control {
@@ -174,22 +318,26 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s ease;
         }
+
         #music-control:hover {
             transform: scale(1.1);
         }
+
         #music-control {
             width: auto;
             padding: 10px 15px;
         }
+
         #volume-display {
             font-size: 14px;
             font-weight: bold;
             color: white;
             margin-right: 8px;
         }
+
         #music-control svg {
             width: 24px;
             height: 24px;
@@ -204,51 +352,163 @@
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
+
         .carousel-track {
             display: flex;
-            width: calc(250px * 8 + 15px * 8); /* 4 images duplicated, plus gap */
+            width: calc(250px * 8 + 15px * 8);
+            /* 4 images duplicated, plus gap */
             animation: scroll 30s linear infinite;
         }
+
         .screenshot-carousel:hover .carousel-track {
             animation-play-state: paused;
         }
+
         .carousel-slide {
             flex-shrink: 0;
             width: 250px;
             margin: 0 7.5px;
         }
+
         .gallery-img {
             width: 100%;
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .gallery-img:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
+
         @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 4 - 15px * 4)); } /* scroll one set of images */
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-250px * 4 - 15px * 4));
+            }
+
+            /* scroll one set of images */
         }
 
-        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 5px; }
-        .lightbox .close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
 
-        .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
-        .modal-content { background-color: var(--section-bg); color: var(--text-primary); padding: 30px; border-radius: 8px; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative; }
-        .modal-content h2 { margin-top: 0; }
-        .modal-content a { color: var(--brand-color); }
-        .modal .close { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 5px;
+        }
 
-        footer { background-color: #111; color: var(--text-secondary); text-align: center; padding: 20px; position: relative; z-index: 5; }
-        footer a { color: var(--brand-color); font-weight: bold; text-decoration: none; cursor: pointer; }
-        footer a:hover { text-decoration: underline; }
+        .lightbox .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-        @media (max-width: 600px) { h1 { font-size: 2.5em; } p.slogan { font-size: 1.1em; } .download-button { font-size: 1.1em; padding: 12px 30px; } .hero-content { padding: 20px; } .content-section h2 { font-size: 2em; } }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--section-bg);
+            color: var(--text-primary);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content a {
+            color: var(--brand-color);
+        }
+
+        .modal .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #111;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        footer a {
+            color: var(--brand-color);
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p.slogan {
+                font-size: 1.1em;
+            }
+
+            .download-button {
+                font-size: 1.1em;
+                padding: 12px 30px;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .content-section h2 {
+                font-size: 2em;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="progress-bar"></div>
     <header class="hero-section">
@@ -260,10 +520,11 @@
             <img src="logo.png" alt="Anidroid Logo" class="logo">
             <h1>Anidroid</h1>
             <p class="slogan">Anime Online Gratis HD</p>
-            <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk" class="download-button">Descargar Ahora</a>
-        </div>
-        <div class="scroll-indicator">
-            <div class="arrow"></div>
+            <a href="https://github.com/YuunoKaori/Anidroid/releases/latest/download/app-release.apk"
+                class="download-button">Descargar Ahora</a>
+            <div class="scroll-indicator">
+                <div class="arrow"></div>
+            </div>
         </div>
     </header>
 
@@ -289,27 +550,76 @@
         <section id="features" class="content-section">
             <h2>Tu Experiencia de Anime Definitiva</h2>
             <div class="features-grid">
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><h3>Perfiles de Usuario</h3><p>Crea tu propio perfil para guardar tus preferencias y tener una experiencia personalizada.</p></div>
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/></svg></div><h3>Playlists Personalizadas</h3><p>Organiza tus animes favoritos en listas de reproducción. ¡Puedes importarlas y exportarlas fácilmente!</p></div>
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Información Detallada</h3><p>Accede a sinopsis, géneros, y más detalles de la gran mayoría de los animes disponibles.</p></div>
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Doble Reproductor</h3><p>Elige entre un reproductor nativo para máxima velocidad o un WebView como alternativa.</p></div>
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></div><h3>Historial de Visionado</h3><p>Lleva un registro de los episodios y animes que has visto. <span class="tag">Alpha</span></p></div>
-                <div class="feature-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div><h3>Anuncios Opcionales</h3><p>Disfruta de una experiencia sin interrupciones con la opción de deshabilitar los anuncios.</p></div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                        </svg></div>
+                    <h3>Perfiles de Usuario</h3>
+                    <p>Crea tu propio perfil para guardar tus preferencias y tener una experiencia personalizada.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z" />
+                        </svg></div>
+                    <h3>Playlists Personalizadas</h3>
+                    <p>Organiza tus animes favoritos en listas de reproducción. ¡Puedes importarlas y exportarlas
+                        fácilmente!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                        </svg></div>
+                    <h3>Información Detallada</h3>
+                    <p>Accede a sinopsis, géneros, y más detalles de la gran mayoría de los animes disponibles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                        </svg></div>
+                    <h3>Doble Reproductor</h3>
+                    <p>Elige entre un reproductor nativo para máxima velocidad o un WebView como alternativa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
+                        </svg></div>
+                    <h3>Historial de Visionado</h3>
+                    <p>Lleva un registro de los episodios y animes que has visto. <span class="tag">Alpha</span></p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                        </svg></div>
+                    <h3>Anuncios Opcionales</h3>
+                    <p>Disfruta de una experiencia sin interrupciones con la opción de deshabilitar los anuncios.</p>
+                </div>
             </div>
         </section>
 
     </main>
 
     <footer>
-        &copy; <span id="year"></span> Anidroid. Todos los derechos reservados. 
+        &copy; <span id="year"></span> Anidroid. Todos los derechos reservados.
         <a id="privacy-link">Política de Privacidad</a>
     </footer>
 
     <audio id="background-music" src="https://listen.moe/stream" preload="auto" loop></audio>
     <button id="music-control" aria-label="Controlar música">
         <span id="volume-display"></span>
-        <svg id="music-icon-playing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.28 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        <svg id="music-icon-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        <svg id="music-icon-playing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+            <path
+                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.28 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+        </svg>
+        <svg id="music-icon-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+                d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+        </svg>
     </button>
 
     <div id="lightbox-modal" class="lightbox">
@@ -322,22 +632,36 @@
             <span class="close">&times;</span>
             <h2>Política de Privacidad de Anidroid</h2>
             <p><strong>Última actualización:</strong> 22 de Junio de 2025</p>
-            <p>Esta política de privacidad describe cómo Anidroid maneja la información. Al usar nuestra aplicación, aceptas las prácticas descritas aquí.</p>
+            <p>Esta política de privacidad describe cómo Anidroid maneja la información. Al usar nuestra aplicación,
+                aceptas las prácticas descritas aquí.</p>
             <h3>1. Fuente del Contenido y Relación con Terceros</h3>
-            <p>Anidroid funciona como un cliente o navegador que accede a contenido audiovisual disponible públicamente en el sitio web de AnimeFLV. No alojamos, distribuimos ni somos propietarios de ningún contenido. La aplicación simplemente facilita el acceso a dicho contenido de una manera organizada.</p>
+            <p>Anidroid funciona como un cliente o navegador que accede a contenido audiovisual disponible públicamente
+                en el sitio web de AnimeFLV. No alojamos, distribuimos ni somos propietarios de ningún contenido. La
+                aplicación simplemente facilita el acceso a dicho contenido de una manera organizada.</p>
             <h3>2. Recopilación de Información</h3>
             <p>Para mejorar la aplicación, utilizamos servicios de análisis de terceros:</p>
             <ul>
-                <li><strong>Yandex AppMetrica:</strong> Recopilamos datos técnicos y de uso de forma seudonimizada, como el tipo de dispositivo, la versión del sistema operativo, informes de errores y eventos de interacción (por ejemplo, qué funciones se usan más). Esto nos ayuda a entender cómo se usa la app, corregir errores y mejorar la experiencia. No recopilamos información de identificación personal como su nombre o correo electrónico. Puede consultar la política de Yandex en <a href="https://yandex.com/legal/metrica_privacy/" target="_blank">su sitio web</a>.</li>
+                <li><strong>Yandex AppMetrica:</strong> Recopilamos datos técnicos y de uso de forma seudonimizada, como
+                    el tipo de dispositivo, la versión del sistema operativo, informes de errores y eventos de
+                    interacción (por ejemplo, qué funciones se usan más). Esto nos ayuda a entender cómo se usa la app,
+                    corregir errores y mejorar la experiencia. No recopilamos información de identificación personal
+                    como su nombre o correo electrónico. Puede consultar la política de Yandex en <a
+                        href="https://yandex.com/legal/metrica_privacy/" target="_blank">su sitio web</a>.</li>
             </ul>
             <h3>3. Publicidad</h3>
-            <p>Anidroid muestra anuncios de redes de terceros para mantener la aplicación gratuita. Estos servicios de publicidad pueden recopilar sus propios datos anónimos para mostrar anuncios relevantes. Ofrecemos una opción dentro de la aplicación para deshabilitar estos anuncios.</p>
+            <p>Anidroid muestra anuncios de redes de terceros para mantener la aplicación gratuita. Estos servicios de
+                publicidad pueden recopilar sus propios datos anónimos para mostrar anuncios relevantes. Ofrecemos una
+                opción dentro de la aplicación para deshabilitar estos anuncios.</p>
             <h3>4. Permisos de la Aplicación</h3>
-            <p>La aplicación puede solicitar permisos para instalar aplicaciones (para actualizaciones) y acceder al almacenamiento (para importar/exportar listas). Estos permisos solo se utilizan para las funciones descritas y no para otros fines.</p>
+            <p>La aplicación puede solicitar permisos para instalar aplicaciones (para actualizaciones) y acceder al
+                almacenamiento (para importar/exportar listas). Estos permisos solo se utilizan para las funciones
+                descritas y no para otros fines.</p>
             <h3>5. Seguridad de los Datos</h3>
-            <p>Tomamos medidas razonables para proteger la información técnica que se recopila, pero ninguna medida de seguridad es 100% infalible. El acceso a los datos de análisis está restringido y protegido.</p>
+            <p>Tomamos medidas razonables para proteger la información técnica que se recopila, pero ninguna medida de
+                seguridad es 100% infalible. El acceso a los datos de análisis está restringido y protegido.</p>
             <h3>6. Cambios a esta Política</h3>
-            <p>Podemos actualizar esta política de privacidad ocasionalmente. Le notificaremos de cualquier cambio publicando la nueva política en esta sección.</p>
+            <p>Podemos actualizar esta política de privacidad ocasionalmente. Le notificaremos de cualquier cambio
+                publicando la nueva política en esta sección.</p>
             <h3>7. Contacto</h3>
             <p>Si tiene alguna pregunta sobre esta política de privacidad, puede contactarnos en: ydnsm60@gmail.com</p>
         </div>
@@ -468,7 +792,7 @@
                         volumeDisplay.textContent = `${Math.round(targetVolume * 100)}%`;
                         iconPlaying.style.display = 'block';
                         iconMuted.style.display = 'none';
-                        
+
                         if (music.paused) {
                             music.play().catch(e => {
                                 console.error("Playback was prevented. Reverting to muted state.", e);
@@ -508,4 +832,5 @@
         });
     </script>
 </body>
+
 </html>
